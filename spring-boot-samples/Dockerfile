@@ -1,5 +1,18 @@
-FROM tomcat:9      
+# Base Image
+FROM openjdk:8
 
-RUN echo 'Deploying War on Server'
+# Create DIR
+RUN mkdir -p /usr/src/myapp
 
-COPY target/springassignment-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+# COPY APPLICTAION COde
+COPY target/*.jar /usr/src/myapp
+
+# Setup Working DIR
+WORKDIR /usr/src/myapp
+
+#EXPOSE
+EXPOSE 8080
+
+# Start the Bot Service
+CMD ["java", "-jar", "*.jar"]
+
